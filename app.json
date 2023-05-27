@@ -23,8 +23,12 @@
         "backgroundColor": "#ffffff"
       }
     },
+    "packagerOpts": {
+      "config": "metro.config.js",
+      "sourceExts": ["ts", "tsx", "scss"]
+    },
     "web": {
-      "favicon": "./assets/favicon.png"
+      "bundler": "metro"
     }
   }
 }

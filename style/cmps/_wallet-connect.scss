@@ -1,0 +1,96 @@
+.wallet-connect {
+    @include flex(20px, center, center, column);
+    margin-top: 20vh;
+    padding: 10px;
+    color:white;
+
+    * {
+        margin: 0;
+    }
+
+    a {
+        color: $main;
+    }
+
+    h1 {
+        font-size: 40px;
+    }
+
+    section {
+        background-color: $table-back;
+        border: 1px solid gray;
+        border-radius: 10px;
+        width: 700px;
+        font-size: 22px;
+
+        .wallet {
+            @include flex(15px, space-between, center);
+            padding: 15px 10px;
+            border-bottom: 1px solid gray;
+            cursor: pointer;
+            div{
+                border: unset;
+                @include flex(10px, center, center);
+            }
+
+            &:last-child {
+                border-bottom: 0px;
+                @include flex(0, center, center);
+
+                span {
+                    color: $main;
+                    text-decoration: underline;
+                }
+            }
+
+            img {
+                margin-left: 10px;
+                width: 30px;
+                aspect-ratio: 1/1;
+                object-fit: cover;
+            }
+            h5{
+                font-weight: 200;
+                color: rgb(100, 100, 100);
+            }
+        }
+    }
+}
+
+.extension {
+    height: 80vh;
+    color: white;
+    background-color: $back-dark;
+    padding: 0 20px;
+
+    .extension-img {
+        width: 300px;
+        aspect-ratio: 1/1;
+    }
+    p{
+        text-align: center;
+    }
+}
+
+
+@media (max-width: $mobile) {
+    .wallet-connect {
+        margin-top: 20px;
+        margin-bottom: 0 !important;
+
+        h1 {
+            font-size: 30px;
+        }
+
+        section {
+            width: 95vw;
+            font-size: 16px;
+            padding: 5px 5px;
+        }
+    }
+    .extension {
+        .extension-img {
+            width: 200px;
+        }
+    }
+}

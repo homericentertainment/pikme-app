@@ -1,0 +1,114 @@
+.player-list {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 100;
+    @include flex(0, center, center, column);
+    background-color: #070A19;
+    overflow-y: scroll;
+    h1{
+        margin: 0;
+    }
+
+    .choose-upper {
+        width: 100%;
+        padding: 20px;
+        @include flex(0, space-between, center);
+        h1 {
+            font-size: 40px;
+            margin: 15px;
+            color: white;
+        }
+        span {
+            font-size: 40px;
+            color: white;
+            cursor: pointer;
+        }
+    }
+    .list-upper{
+        padding: 20px;
+        width: 100%;
+        @include flex(0, space-between, center);
+        h1{
+            font-size: 28px;
+            color: white;
+        }
+        span {
+            font-size: 28px;
+            color: white;
+            cursor: pointer
+        }
+    }
+
+    .players-container {
+        @include flex(0, center, center);
+        flex-wrap: wrap;
+        width: max-content;
+        max-width: 90vw;
+
+        div {
+            @include flex(0, space-between, center, column);
+            cursor: pointer;
+            border: 1px solid $bright-back;
+            padding: 10px 0 ;
+
+            img {
+                width: 70%;
+                aspect-ratio: 1/1;
+                object-fit: cover;
+                border-radius: 50%;
+            }
+            p {
+                color: white;
+                margin: 0;
+            }
+            h3 {
+                color: $main;
+                margin: 0;
+            }
+        }
+        div:hover {
+            img {
+                outline: 3px solid $main;
+            }
+        }
+    }
+}
+.top-fixed{
+    position: absolute;
+    top: 20px;
+    transform:translateX(-50%);
+}
+
+@media (max-width: 800px) {
+    .player-list {
+        width: fit-content;
+        .choose-upper,.list-upper{
+            h1 {
+                font-size: 22px;
+                margin: 0;
+            }
+            span {
+                font-size: 22px;
+            }
+        }
+        .players-container {
+            width: 95vw;
+            div {
+                width: 114px !important;
+                height: 150px !important;
+                padding: 10px 3px;
+                img {
+                    width: 80px;
+                }
+                p {
+                    font-size: 14px;
+                }
+                h3 {
+                    font-size: 16px;
+                }
+            }
+        }
+    }
+}

@@ -1,0 +1,443 @@
+:root {
+    --video-height: 100%;
+    --bar-display: flex;
+}
+
+.stream-container {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    overflow: hidden;
+    background-color: $back-dark;
+    height: calc(100vh - 50px);
+}
+
+.stream {
+    display: flex;
+    flex: 18;
+    flex-direction: column;
+
+    .stream-video {
+        @include flex(0, center, center);
+        flex: 18;
+        background-color: #000000;
+        position: relative;
+
+        h1 {
+            font-size: 48px;
+            text-align: center;
+            color: white;
+            margin: 8px;
+        }
+
+        .timer {
+            @include flex(0, center, center);
+            font-size: 80px;
+            margin: 0;
+            padding: 0;
+            color: white;
+            margin-top: 20px;
+            background-color: #3b3b3b2d;
+        }
+    }
+
+    .stream-video>div {
+        height: var(--video-height) !important;
+    }
+
+    .mute-pos {
+        position: absolute;
+        bottom: 5px;
+        right: 5px;
+        z-index: 1;
+        @include flex(5px, center, center);
+
+        svg {
+            width: 24px;
+            height: 24px;
+            cursor: pointer;
+        }
+    }
+}
+
+.stream-info {
+    flex: 3;
+    @include flex(0, space-between, center);
+    box-shadow: 0px -4px 0px 0px #000000;
+
+    .chosen {
+        color: white;
+        @include flex(10px, center, center);
+        height: fit-content;
+        padding: 0 18px;
+
+        img {
+            width: 85px;
+            aspect-ratio: 1/1;
+            border-radius: 50%;
+            object-fit: cover;
+        }
+
+        .align-right {
+            align-items: flex-end;
+        }
+
+        div {
+            height: 85px;
+            @include flex(0, space-around, flex-start, column);
+
+            h4 {
+                font-size: 20px;
+                margin: 0;
+                display: block;
+            }
+
+            p {
+                font-size: 16px;
+                margin: 0;
+                display: block;
+                color: $main;
+                text-decoration: underline;
+                cursor: pointer;
+            }
+
+            h5 {
+                font-size: 20px;
+                margin: 0;
+                display: block;
+            }
+
+            h6 {
+                font-size: 16px;
+                margin: 0;
+                color: rgba($color: #ffffff, $alpha: 0.9);
+                display: block;
+            }
+        }
+    }
+
+    .details {
+        @include flex(80px, center, center);
+        margin-right: 10px;
+
+        div {
+            @include flex(5px, center, center);
+
+            img {
+                width: 30px;
+                height: 30px;
+            }
+
+            p {
+                font-size: 28px;
+                margin: 0;
+                color: white;
+            }
+        }
+    }
+
+    .details-fund {
+        @include flex(20px, center, center);
+    }
+}
+
+.vid-control {
+    display: none;
+}
+
+
+.events-bar {
+    display: flex;
+    width: fit-content;
+    padding-right: 30px;
+    padding-top: 10px;
+    flex-direction: column;
+    border-left: 1px solid;
+    align-items: center;
+    box-shadow: 0px 0px 10px 0px #000000;
+    position: static;
+    overflow-y: scroll;
+    cursor: pointer;
+}
+
+.events-bar-child {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    padding-left: 10px;
+    align-items: center;
+    margin-top: 20px;
+    width: 100%;
+    gap: 5px;
+
+    .team-icon {
+        width: 60px;
+        aspect-ratio: 1/1;
+        object-fit: cover;
+        border-radius: 50%;
+        margin-bottom: 10px;
+    }
+
+    .img-selected {
+        border: 2px solid $main;
+    }
+
+    div {
+        @include flex(0, space-evenly, flex-start, column);
+        height: 100%;
+
+        P {
+            color: white;
+            font-size: 18px;
+            margin: 0;
+        }
+
+        h5 {
+            color: #ffffff;
+            margin: 0;
+            font-size: 18px;
+            font-weight: 100;
+        }
+
+        .timer {
+            @include flex(0, center, center);
+            font-size: 14px;
+            color: #dddddd;
+        }
+    }
+}
+
+.no-tickets-wrapper {
+    height: calc(100vh - 366px);
+    @include flex(0, center, center);
+    color: white;
+
+    .no-tickets {
+        @include flex(10px, center, center, column);
+
+        img {
+            width: 300px;
+            margin: auto;
+        }
+
+        p {
+            text-align: center;
+            font-size: 30px;
+            margin: 0;
+        }
+    }
+}
+
+
+
+@media only screen and (max-width: 1400px) {
+    .events-bar-child {
+        flex-direction: column;
+
+        p {
+            text-align: center;
+            color: #ffffff;
+        }
+    }
+}
+
+@media only screen and (max-width: 900px) {
+    .stream-container {
+        flex-direction: column;
+        height: calc(100vh - 25px);
+        flex-basis: auto;
+        flex: 0;
+
+        .events-bar {
+            box-shadow: unset;
+            padding: 10px;
+            padding-bottom: 0 !important;
+            overflow-x: scroll;
+            @include flex(10px, flex-start, center);
+            white-space: nowrap;
+
+            .events-bar-child {
+                @include flex(0, space-evenly, flex-start, column);
+                height: 100%;
+                margin-top: 0;
+
+                P {
+                    display: none;
+                }
+
+                h5 {
+                    margin: 0;
+                    font-size: 12px;
+                    font-weight: 100;
+                }
+
+                .timer {
+                    font-size: 14px;
+                }
+
+                .team-icon {
+                    width: 40px;
+                    margin: auto;
+                    margin-bottom: 10px;
+                }
+            }
+        }
+
+        .stream {
+            flex: 2;
+
+            .stream-video {
+                @include flex(10px, center, center);
+                background-size: cover;
+                flex: 1;
+
+                h1 {
+                    font-size: 24px;
+                }
+
+                .timer-wrapper {
+                    .timer {
+                        font-size: 25px;
+                        margin-top: 20px;
+                    }
+
+                    .live-in {
+                        width: 70vw;
+                    }
+                }
+            }
+
+            .stream-info {
+                flex: 0;
+                padding: 0;
+
+                .chosen {
+                    padding: 0 10px;
+
+                    img {
+                        width: 30px;
+                    }
+
+                    div {
+                        height: 50px;
+
+                        h4 {
+                            font-size: 14px;
+                        }
+
+                        p {
+                            font-size: 12px;
+                        }
+
+                        h5 {
+                            font-size: 15px;
+                            font-weight: 200
+                        }
+                    }
+                }
+
+                .details {
+                    @include flex(4px, center, center, column);
+                    margin-right: unset;
+
+                    div {
+                        img {
+                            width: 15px;
+                            height: 15px;
+                        }
+
+                        p {
+                            font-size: 12px;
+                            margin: 0;
+                            color: white;
+                        }
+                    }
+                }
+
+                .details-fund {
+                    @include flex(10px, center, center);
+                    padding-right: 10px;
+
+                    p {
+                        font-size: 14px !important;
+                    }
+                }
+            }
+
+            .vid-control {
+                @include flex(10px, space-between, center);
+                position: absolute;
+                bottom: 0;
+                padding: 0 10px;
+                height: unset !important;
+                z-index: 1000;
+                width: 100%;
+
+                .mute {
+                    width: 20px;
+                    height: 20px;
+                    cursor: pointer;
+                    margin-bottom: 2px;
+                }
+
+                .mute-bigger {
+                    width: 22px;
+                    height: 22px;
+                }
+
+                .full-button {
+                    span {
+                        font-size: 26px;
+                        font-weight: 400;
+                        color: $main;
+                    }
+                }
+            }
+        }
+    }
+
+    .no-tickets-wrapper {
+        .no-tickets {
+            img {
+                width: 160px;
+            }
+
+            p {
+                font-size: 24px;
+                padding: 0 10px;
+            }
+        }
+    }
+}
+
+.full-screen {
+    position: fixed !important;
+    top: 50vh;
+    left: 50vw;
+    width: 98vh;
+    height: 98vw;
+    transform: translate(-50%, -50%) rotate(90deg);
+    z-index: 1001;
+}
+
+::-webkit-scrollbar {
+    width: 0px;
+    background: transparent;
+}
+
+::-webkit-scrollbar-track {
+    background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+    background: transparent;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: transparent;
+}
+
+audio::-webkit-media-controls,
+video::-webkit-media-controls {
+    display: var(--bar-display);
+}
