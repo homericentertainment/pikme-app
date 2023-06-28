@@ -2,7 +2,7 @@ $main : #F37F13;
 $sec : #F29B00;
 $gray : #818181;
 
-@mixin flex($gap:10px ,$justify: center, $align: center,$dir: row) {
+@mixin flex($gap:0px ,$justify: center, $align: center,$dir: row) {
   display:flex;
   justify-content: $justify;
   align-items: $align;
@@ -15,16 +15,17 @@ $gray : #818181;
   scroll-behavior: smooth;
 }
 
-
 // //pages
 
 
 // //components
+@import "./cmps/footer.scss";
 
-
-.main-layout {
-  margin-top: 60px;
-  margin-bottom: 50px;
+.main{
+  width: 100vw;
+  height: 100vh;
+  background-color: aqua;
+  color:#F37F13;
 }
 
 .underline {

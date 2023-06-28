@@ -1,12 +1,16 @@
- import { httpService } from "./http.service"
- 
- export const service = {
-    lala
+import { httpService } from "./http.service"
+
+export const service = {
+    getUser,
+    createUser
 }
 
-async function lala(){
-    console.log('kkk')
-    const la = await httpService.get('https://yesno.wtf/api')
-    console.log(la)
-    return 7
+async function getUser(id) {
+    const user = await httpService.get('get-user/' + id)
+    return user
+}
+
+async function createUser(user) {
+    const newUser = await httpService.post('create-user', {user} )
+    return newUser
 }
