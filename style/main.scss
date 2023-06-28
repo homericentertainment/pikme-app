@@ -1,50 +1,67 @@
-//basics
-// @import "/src/style/base/variables.scss";
-// @import "/src/style/base/helpers";
-// @import "/src/style/base/font-face";
-// @import "/src/style/base/mixins";
-// @import "/src/style/base/themes";
+$main : #F37F13;
+$sec : #F29B00;
+$gray : #818181;
 
-// //pages
-// @import "/src/style/pages/home";
-// @import "src/style/pages/profile";
-// @import "src/style/pages/landing";
-// @import "src/style/pages/stream";
-// @import "src/style/pages/error";
+@mixin flex($gap:10px ,$justify: center, $align: center,$dir: row) {
+  display:flex;
+  justify-content: $justify;
+  align-items: $align;
+  gap: $gap;
+  flex-direction: $dir;
+ }
 
-// //components
-// @import "/src/style/cmps/header";
-// @import "/src/style/cmps/filter-bar";
-// @import "src/style/cmps/menu";
-// @import "src/style/cmps/popup";
-// @import "src/style/cmps/wallet-connect";
-// @import "src/style/cmps/profile-statistics";
-// @import "src/style/cmps/search-bar";
-// @import "src/style/cmps/loader";
-// @import "src/style/cmps/footer";
-// @import "src/style/cmps/event-box";
-// @import "src/style/cmps/event-box-fund";
-// @import "src/style/cmps/event-box-loader";
-// @import "src/style/cmps/chat-box";
-// @import "src/style/cmps/stream-chat";
-// @import "src/style/cmps/players-list";
-// @import "src/style/cmps/upper-popup";
-// @import "src/style/cmps/simple-popup";
-// @import "src/style/cmps/tutorial";
-
-
-* {
+ * {
   box-sizing: border-box;
-  font-family: roboto-normal;
   scroll-behavior: smooth;
 }
 
-.lala{
-  color: rgb(0, 247, 255);
-  background-color: chartreuse;
-}
+
+// //pages
+
+
+// //components
+
 
 .main-layout {
   margin-top: 60px;
   margin-bottom: 50px;
+}
+
+.underline {
+  text-decoration: underline;
+}
+
+.non-appear {
+  display: none;
+}
+
+.hidden {
+  visibility: hidden;
+}
+
+.screen {
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 100vh;
+  width: 100vw;
+  opacity: 0;
+  background-color: black;
+  z-index: 10;
+}
+
+.blur {
+  opacity: 0.6;
+}
+
+.no-scroll {
+  overflow-y: hidden;
+}
+
+input[type="number"] {
+  -moz-appearance: textfield;
+}
+
+input:focus {
+  outline: 0px;
 }
