@@ -4,18 +4,18 @@ export const slice = createSlice({
   name: "general",
   initialState: {
     user: null,
-    page: 'home'
+    page: 'vote'
   },
   reducers: {
     setUser: (state, action) => {
-      state.stats = action.payload
+      state.user = action.payload
     },
     setPage: (state, action) => {
-      state.stats = action.payload
+      state.page = action.payload
     },
     resetState: (state) => {
       state.user = null
-      state.page = 'home'
+      state.page = 'vote'
     },
   },
 })

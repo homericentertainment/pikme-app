@@ -1,4 +1,3 @@
-
 const { getDefaultConfig } = require("metro-config");
 
 module.exports = (async () => {
@@ -7,10 +6,10 @@ module.exports = (async () => {
   } = await getDefaultConfig()
   return {
     transformer: {
-      babelTransformerPath: require.resolve("react-native-sass-transformer")
+      babelTransformerPath: require.resolve("react-native-css-transformer")
     },
     resolver: {
-      sourceExts: [...sourceExts, "scss", "sass"]
+      sourceExts: [...sourceExts, "css"]
     }
   }
 })()
