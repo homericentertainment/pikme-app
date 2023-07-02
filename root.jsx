@@ -7,6 +7,7 @@ import style from './style/main.css'
 import { AsyncStorage } from 'react-native'
 import { Vote } from './pages/vote'
 import { Saved } from './pages/saved'
+import { UpperPopup } from './cmps/upper-popup'
 import { service } from './service'
 
 export default function Root() {
@@ -49,11 +50,12 @@ export default function Root() {
     return (
         <View style={style.main}>
             {page === 'saved' && <Saved style={style} user={{ _id: '64a16bc001e9edc6d8b9c43a' }} />}
-            {page === 'vote' && <Vote style={style} />}
+            {page === 'vote' && <Vote style={style} user={{ _id: '64a16bc001e9edc6d8b9c43a' }}/>}
             <View style={style.footer}>
                 <Text onPress={() => dispatch(setPage('saved'))}>saved</Text>
                 <Text onPress={() => dispatch(setPage('vote'))}>vote</Text>
             </View>
+            <UpperPopup />
         </View>
     )
 }

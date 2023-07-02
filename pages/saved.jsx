@@ -32,7 +32,8 @@ export function Saved({ user, style }) {
 
     try {
         return (
-            <View>
+            <View >
+                <Text onPress={()=>service.createEvent()}>create!</Text>
                 {saved.map((anime,idx) => <Text key={idx}>{anime.name}</Text>)}
             </View>
         )

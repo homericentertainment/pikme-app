@@ -4,7 +4,8 @@ export const slice = createSlice({
   name: "general",
   initialState: {
     user: null,
-    page: 'vote'
+    page: 'vote',
+    upperPopup: ''
   },
   reducers: {
     setUser: (state, action) => {
@@ -13,9 +14,13 @@ export const slice = createSlice({
     setPage: (state, action) => {
       state.page = action.payload
     },
+    setUpperPopup: (state, action) => {
+      state.upperPopup = action.payload
+    },
     resetState: (state) => {
       state.user = null
       state.page = 'vote'
+      state.upperPopup = ''
     },
   },
 })

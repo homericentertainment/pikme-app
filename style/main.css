@@ -58,3 +58,30 @@ input:focus {
     flex-direction: row;
     padding: 0 20px;
 }
+
+.upper-popup-wrapper{
+    position: fixed;
+    z-index: 1000;
+    top: 40px;
+    border-radius: 10px;
+    width: 100vw;
+    background-color: transparent;
+    animation: slide-down 0.5s ease;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.upper-popup{
+    width: 300px;
+    text-align: center;
+}
+
+@keyframes slide-down {
+    0% {
+        top: -20px;
+    }
+    100% {
+        top: 10px;
+    }
+}
