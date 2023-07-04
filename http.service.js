@@ -2,7 +2,8 @@ import Axios from 'axios'
 
 const BASE_URL = process.env.NODE_ENV === 'production'
     ? 'https://games-server-k73y.onrender.com/anime-ranking/'
-    : '//localhost:3030/anime-ranking/'
+    : 'https://games-server-k73y.onrender.com/anime-ranking/'
+    // : '//localhost:3030/anime-ranking/'
 
 
 var axios = Axios.create({

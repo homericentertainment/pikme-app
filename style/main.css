@@ -8,6 +8,7 @@
 
 .main {
     margin-top: 50px;
+    padding-top: 50px;
     width: 100vw;
     height: 100vh;
     background-color: var(--main);

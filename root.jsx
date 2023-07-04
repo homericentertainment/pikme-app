@@ -5,10 +5,10 @@ import { setPage, setUser } from './store/reducer'
 import { useState, useEffect } from 'react'
 import * as Font from 'expo-font'
 import style from './style/main.css'
-import { AsyncStorage } from 'react-native'
 import { Vote } from './pages/vote'
 import { Saved } from './pages/saved'
 import { UpperPopup } from './cmps/upper-popup'
+import AsyncStorage from '@react-native-async-storage/async-storage'
 import { service } from './service'
 
 export default function Root() {
@@ -29,33 +29,38 @@ export default function Root() {
     }
 
     const handleUser = async () => {
-        if(!AsyncStorage) setError('000000000')
-        else setError('999999')
-
+        try {
+            const newUser = await service.createUser({ name: 'user' + Math.random() })
+            console.log(newUser)
+            await AsyncStorage.setItem('user', newUser)
+        }
+        catch{
+setError('4444')
+        }
         // try {
-        //     if(!AsyncStorage) setError('000000000')
         //     const userFromStorage = await AsyncStorage.getItem('user')
-        //     try{
-        //         if (!userFromStorage) {
-        //         const newUser = await service.createUser({ name: 'user' + Match.random() })
+        //     if (!userFromStorage) {
+        //         const newUser = await service.createUser({ name: 'user' + Math.random() })
         //         await AsyncStorage.setItem('user', newUser)
         //         dispatch(setUser(newUser))
         //     }
         //     else dispatch(setUser(user))
-        //     }
-        //     catch{
-        //         setError('111111')
-        //     }
+
         // }
         // catch (err) {
+        //     console.log(err)
         //     setError('22222222222')
         // }
-
     }
 
     if (error) {
+        console.log(error)
         return <Text>{error}</Text>
     }
+
+    return <View style={style.main}>
+        <Text>{error}</Text>
+    </View>
 
     if (!user) return <Loader />
 
