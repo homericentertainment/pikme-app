@@ -1,10 +1,13 @@
 import { Text, View } from 'react-native'
 import { useState, useEffect } from 'react'
+import { useDispatch } from 'react-redux'
 import { service } from '../service'
+import { setUpperPopup } from '../store/reducer'
 import { Loader } from '../cmps/loader'
 import { Error } from './error'
 
 export function Saved({ user, style }) {
+    const dispatch = useDispatch()
     const [saved, setSaved] = useState(null)
     const [error, setError] = useState(false)
 
@@ -15,13 +18,23 @@ export function Saved({ user, style }) {
     async function loadSaved() {
         try {
             const loadedSaved = await service.getSaved(user._id)
-            setSaved(loadedSaved)
+            setSaved(Object.values(loadedSaved))
         }
         catch (err) {
             console.log(err)
             setError(true)
         }
+    }
 
+    async function deleteSaved(animeName) {
+        try {
+            await service.deleteSaved(user._id, animeName)
+            loadSaved()
+        }
+        catch (err) {
+            console.log(err)
+            dispatch(setUpperPopup('error'))
+        }
     }
 
     if (error) return <Error />
@@ -33,8 +46,8 @@ export function Saved({ user, style }) {
     try {
         return (
             <View >
-                <Text onPress={()=>service.createEvent()}>create!</Text>
-                {saved.map((anime,idx) => <Text key={idx}>{anime.name}</Text>)}
+                <Text onPress={() => service.createEvent()}>create!</Text>
+                {saved.map((anime, idx) => <Text onPress={() => deleteSaved(anime.name)} key={idx}>{anime.name}</Text>)}
             </View>
         )
     }

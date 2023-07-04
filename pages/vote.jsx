@@ -1,7 +1,7 @@
 import { Text, View } from 'react-native'
 import { useState, useEffect } from 'react'
 import { useDispatch } from 'react-redux'
-import {setUpperPopup} from '../store/reducer'
+import { setUpperPopup } from '../store/reducer'
 import { Error } from './error'
 import { Loader } from '../cmps/loader'
 import { service } from '../service'
@@ -24,11 +24,10 @@ export function Vote({ user, style }) {
                 setVoteState('voted')
                 return
             }
-            console.log(loadedEvent)
             const state = {
                 currentTier: 1,
-                totalParticipants: loadedEvent.participants.length,
-                1: loadedEvent.participants
+                totalParticipants: Object.keys(loadedEvent.participants).length,
+                1: Object.keys(loadedEvent.participants)
             }
             for (i = 2; i <= Math.log2(4) + 1; i++) state[i] = []
             setVoteState(state)
@@ -56,15 +55,22 @@ export function Vote({ user, style }) {
 
     const vote = async (chosen) => {
         try {
-            const g = chosen.ll.gg
             await service.addVote(user._id, chosen)
-            setVoteState('voted')
+            loadCurrentEvent()
         }
         catch {
             dispatch(setUpperPopup('error'))
-            setError(true)
         }
+    }
 
+    const saveAnime = async (anime, image) => {
+        try {
+            await service.saveAnime(user._id, anime, image)
+            dispatch(setUpperPopup('saved'))
+        }
+        catch {
+            dispatch(setUpperPopup('error'))
+        }
     }
 
     if (error) return <Error />
@@ -73,13 +79,16 @@ export function Vote({ user, style }) {
 
     if (voteState === 'voted') {
         try {
-            const participants = Object.keys(event.votes)
-            const votes = Object.values(event.votes)
+            const participants = Object.values(event.participants).sort((a, b) => b.votes - a.votes)
             return <View>
-                {participants.map((participant, idx) => <Text key={idx}>{participant} : {votes[idx]}</Text>)}
+                {participants.map((p) => <View key={p.name}>
+                    <Text >{p.name} : {p.votes}</Text>
+                    <Text key={p.name + 'ssss'} onPress={() => saveAnime(p.from, p.animeImage)}>save {p.from}</Text>
+                </View>)}
             </View>
         }
-        catch {
+        catch (err) {
+            console.log(err)
             return <Error />
         }
     }

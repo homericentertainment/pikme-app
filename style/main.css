@@ -7,6 +7,7 @@
 @import './cmps/footer.css';
 
 .main {
+    margin-top: 50px;
     width: 100vw;
     height: 100vh;
     background-color: var(--main);
@@ -59,29 +60,22 @@ input:focus {
     padding: 0 20px;
 }
 
-.upper-popup-wrapper{
+.upperPopupWrapper{
     position: fixed;
     z-index: 1000;
     top: 40px;
     border-radius: 10px;
     width: 100vw;
     background-color: transparent;
-    animation: slide-down 0.5s ease;
     display: flex;
     justify-content: center;
     align-items: center;
 }
 
-.upper-popup{
-    width: 300px;
+.upperPopup{
+    width: 90vw;
     text-align: center;
-}
-
-@keyframes slide-down {
-    0% {
-        top: -20px;
-    }
-    100% {
-        top: 10px;
-    }
+    background-color: rgb(241, 110, 110);
+    color: rgb(0, 255, 34);
+    font-size: x-large;
 }

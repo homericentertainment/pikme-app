@@ -28,6 +28,7 @@ export const slice = createSlice({
 export const {
   setUser,
   setPage,
+  setUpperPopup,
 } = slice.actions
 
 export default slice.reducer
