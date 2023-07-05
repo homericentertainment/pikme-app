@@ -1,13 +1,10 @@
 import { Text, View } from 'react-native'
 import { useState, useEffect } from 'react'
-import { useDispatch } from 'react-redux'
 import { service } from '../service'
-import { setUpperPopup } from '../store/reducer'
 import { Loader } from '../cmps/loader'
 import { Error } from './error'
 
-export function Saved({ user, style }) {
-    const dispatch = useDispatch()
+export function Saved({ user, style,setUpperPopup }) {
     const [saved, setSaved] = useState(null)
     const [error, setError] = useState(false)
 
@@ -32,8 +29,8 @@ export function Saved({ user, style }) {
             loadSaved()
         }
         catch (err) {
+            setUpperPopup('error')
             console.log(err)
-            dispatch(setUpperPopup('error'))
         }
     }
 
@@ -46,7 +43,6 @@ export function Saved({ user, style }) {
     try {
         return (
             <View >
-                <Text onPress={() => service.createEvent()}>create!</Text>
                 {saved.map((anime, idx) => <Text onPress={() => deleteSaved(anime.name)} key={idx}>{anime.name}</Text>)}
             </View>
         )

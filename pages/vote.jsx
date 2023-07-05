@@ -1,13 +1,10 @@
 import { Text, View } from 'react-native'
 import { useState, useEffect } from 'react'
-import { useDispatch } from 'react-redux'
-import { setUpperPopup } from '../store/reducer'
 import { Error } from './error'
 import { Loader } from '../cmps/loader'
 import { service } from '../service'
 
-export function Vote({ user, style }) {
-    const dispatch = useDispatch()
+export function Vote({ user, style, setUpperPopup }) {
     const [event, setEvent] = useState(null)
     const [voteState, setVoteState] = useState(null)
     const [error, setError] = useState(false)
@@ -59,17 +56,18 @@ export function Vote({ user, style }) {
             loadCurrentEvent()
         }
         catch {
-            dispatch(setUpperPopup('error'))
+            setUpperPopup('error')
         }
     }
 
     const saveAnime = async (anime, image) => {
         try {
             await service.saveAnime(user._id, anime, image)
-            dispatch(setUpperPopup('saved'))
+            setUpperPopup('saved')
+
         }
         catch {
-            dispatch(setUpperPopup('error'))
+            setUpperPopup('error')
         }
     }
 

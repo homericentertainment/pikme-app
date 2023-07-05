@@ -7,13 +7,12 @@
 @import './cmps/footer.css';
 
 .main {
-    margin-top: 50px;
-    padding-top: 50px;
-    width: 100vw;
-    height: 100vh;
+    width: 100%;
+    height: 100%;
     background-color: var(--main);
     color:var(--words);
     color:black;
+    background-color: bisque;
 }
 
 .underline {
