@@ -1,10 +1,11 @@
 import { Text, View } from 'react-native'
+import { style } from '../style'
 import { useState, useEffect } from 'react'
 import { service } from '../service'
 import { Loader } from '../cmps/loader'
 import { Error } from './error'
 
-export function Saved({ user, style,setUpperPopup }) {
+export function Saved({ user, setUpperPopup }) {
     const [saved, setSaved] = useState(null)
     const [error, setError] = useState(false)
 
@@ -38,11 +39,12 @@ export function Saved({ user, style,setUpperPopup }) {
 
     if (!saved) return <Loader />
 
-    if (saved.length === 0) return <Text>no saved</Text>
+    if (saved.length === 0) return <Text>no saved for {user.name}</Text>
 
     try {
         return (
             <View >
+                <Text>{user.name}</Text>
                 {saved.map((anime, idx) => <Text onPress={() => deleteSaved(anime.name)} key={idx}>{anime.name}</Text>)}
             </View>
         )

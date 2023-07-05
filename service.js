@@ -1,4 +1,5 @@
 import { httpService } from "./http.service"
+import AsyncStorage from '@react-native-async-storage/async-storage'
 
 export const service = {
     getUser,
@@ -8,7 +9,9 @@ export const service = {
     deleteSaved,
     getCurrentEvent,
     addVote,
-    createEvent
+    createEvent,
+    loadFromStorage,
+    saveToStorage
 }
 
 async function getUser(id) {
@@ -26,8 +29,8 @@ async function getSaved(userId) {
     return saved
 }
 
-async function saveAnime(id, animeName,image) {
-    const confirm = await httpService.post('save-anime' , { id, animeName,image })
+async function saveAnime(id, animeName, image) {
+    const confirm = await httpService.post('save-anime', { id, animeName, image })
     return confirm
 }
 
@@ -47,8 +50,18 @@ async function addVote(userId, chosen) {
 }
 
 async function createEvent() {
-    console.log('createEvent')
     const newEvent = await httpService.post('create-event')
+    console.log('createEvent')
     return newEvent
 }
+
+async function loadFromStorage(key) {
+    const data = await AsyncStorage.getItem(key)
+    return JSON.parse(data)
+}
+
+async function saveToStorage(key, value) {
+    AsyncStorage.setItem(key, JSON.stringify(value))
+}
+
 

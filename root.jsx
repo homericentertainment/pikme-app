@@ -3,12 +3,12 @@ import { Loader } from './cmps/loader'
 import { Error } from './pages/error'
 import { useState, useEffect } from 'react'
 import * as Font from 'expo-font'
-import style from './style/main.css'
+import { style } from './style.js'
 import { Vote } from './pages/vote'
 import { Saved } from './pages/saved'
 import { UpperPopup } from './cmps/upper-popup'
-import AsyncStorage from '@react-native-async-storage/async-storage'
 import { service } from './service'
+import AsyncStorage from '@react-native-async-storage/async-storage'
 
 export default function Root() {
     const [user, setUser] = useState(null)
@@ -23,17 +23,16 @@ export default function Root() {
 
     async function loadFont() {
         await Font.loadAsync({
-            'custom-font': require('./style/Roboto-Medium.ttf'),
+            'custom-font': require('./Roboto-Medium.ttf')
         })
     }
 
     const handleUser = async () => {
-        AsyncStorage.clear()
         try {
-            const userFromStorage = await AsyncStorage.getItem('user')
+            const userFromStorage = await service.loadFromStorage('user')
             if (!userFromStorage) {
                 const newUser = await service.createUser({ name: 'user' + Math.random() })
-                await AsyncStorage.setItem('user', JSON.stringify(newUser))
+                await service.saveToStorage('user', newUser)
                 setUser(newUser)
             }
             else setUser(userFromStorage)
@@ -56,8 +55,9 @@ export default function Root() {
                 <View style={style.footer}>
                     <Text onPress={() => setPage('saved')}>saved</Text>
                     <Text onPress={() => setPage('vote')}>vote</Text>
+                    <Text onPress={() => service.createEvent()}>new ev</Text>
                 </View>
-                <UpperPopup style={style} upperPopup={upperPopup} setUpperPopup={setUpperPopup} />
+                <UpperPopup tyle={style} upperPopup={upperPopup} setUpperPopup={setUpperPopup} />
             </View>
         )
     }

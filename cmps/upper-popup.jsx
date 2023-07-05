@@ -1,7 +1,8 @@
 import { View, Text } from 'react-native'
 import { useEffect } from "react"
+import { style } from '../style'
 
-export function UpperPopup({ style, upperPopup, setUpperPopup }) {
+export function UpperPopup({ upperPopup, setUpperPopup }) {
     useEffect(() => {
         if (upperPopup) reset()
     }, [upperPopup])
