@@ -1,14 +1,37 @@
-const main = 'yellow'
-const back = 'red'
-const words = 'blue'
+import { Dimensions } from "react-native"
 
-export const style = {
+const back = 'rgba(105,155,247,0.4)'
+const action = '#699BF7'
+const words = 'white'
+
+const style = {
   main: {
     width: "100%",
-    height: "90%",
-    color: words,
-    backgroundColor: main,
-    marginTop:50
+    backgroundImage: 'url(./images/background.webp)',
+    backgroundSize: 'cover',
+    height: Dimensions.get('window').height,
+    paddingTop: 75,
+    boxSizing: "border-box",
+    color: words
+  },
+  header: {
+    width: '100%',
+    display: 'flex',
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+    position: 'fixed',
+    top: 35,
+    height: 40,
+    zIndex: 1,
+    borderBottomColor: back,
+    borderBottomWidth: 1,
+    paddingLeft: 15,
+    paddingRight: 15,
+  },
+  menuIcon:{
+    width: 30,
+    height: 30,
   },
   underline: {
     textDecorationLine: "underline",
@@ -29,19 +52,29 @@ export const style = {
   blur: {
     opacity: 0.6,
   },
-  footer: {
-    position: "absolute",
-    bottom: 0,
-    width: "100%",
-    height: 40,
-    backgroundColor: back,
-    paddingHorizontal: 10,
-    paddingVertical: 0,
-    display: "flex",
-    justifyContent: "space-evenly",
-    alignItems: "center",
-    flexDirection: "row",
-    padding: 20,
+  landing: {
+    color: words,
+  },
+  landingImg: {
+    width: '100%',
+    height: parseInt(Dimensions.get('window').width * 47 / 39),
+  },
+  landingTxt: {
+    fontSize: 30,
+    textAlign: 'center',
+    marginTop: 20,
+    marginBottom: 20,
+    color: words,
+  },
+  play: {
+    width: '85%',
+    backgroundColor: action,
+    fontSize: 300,
+    borderRadius: 10,
+    margin: 'auto',
+    textAlign: 'center',
+    padding: 10,
+    border: 'none',
   },
   upperPopupWrapper: {
     position: "absolute",
@@ -61,4 +94,9 @@ export const style = {
     color: "rgb(0, 255, 34)",
     fontSize: "x-large",
   },
+  words: {
+    color: words,
+  }
 };
+
+export default style;

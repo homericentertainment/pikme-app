@@ -1,20 +1,22 @@
-import { Text, View } from 'react-native'
+import { Text, View, Image, Dimensions,StyleSheet } from 'react-native'
 import { Loader } from './cmps/loader'
 import { Error } from './pages/error'
 import { useState, useEffect } from 'react'
 import * as Font from 'expo-font'
-import { style } from './style.js'
+import style from './style.js'
 import { Vote } from './pages/vote'
 import { Saved } from './pages/saved'
+import { Landing } from './pages/landing'
+import { Header } from './cmps/header'
 import { UpperPopup } from './cmps/upper-popup'
 import { service } from './service'
-import AsyncStorage from '@react-native-async-storage/async-storage'
 
 export default function Root() {
     const [user, setUser] = useState(null)
-    const [upperPopup, setUpperPopup] = useState('')
-    const [page, setPage] = useState('saved')
+    const [upperPopup, setUpperPopup] = useState('123')
+    const [page, setPage] = useState('vote')
     const [error, setError] = useState(false)
+    const [header,setHeader] = useState('')
 
     useEffect(() => {
         loadFont()
@@ -25,6 +27,8 @@ export default function Root() {
         await Font.loadAsync({
             'custom-font': require('./Roboto-Medium.ttf')
         })
+        const landing = await service.loadFromStorage('landing')
+        if (!landing) setPage('landing')
     }
 
     const handleUser = async () => {
@@ -43,6 +47,12 @@ export default function Root() {
         }
     }
 
+    Text.defaultProps = {
+        ...Text.defaultProps,
+        style: { color: 'white' },
+      };
+      
+
     if (error) return <Error />
 
     if (!user) return <Loader />
@@ -50,13 +60,10 @@ export default function Root() {
     try {
         return (
             <View style={style.main}>
-                {page === 'saved' && <Saved style={style} user={user} setUpperPopup={setUpperPopup} />}
-                {page === 'vote' && <Vote style={style} user={user} setUpperPopup={setUpperPopup} />}
-                <View style={style.footer}>
-                    <Text onPress={() => setPage('saved')}>saved</Text>
-                    <Text onPress={() => setPage('vote')}>vote</Text>
-                    <Text onPress={() => service.createEvent()}>new ev</Text>
-                </View>
+                {page !== 'landing' && <Header header={header} setPage={setPage}/>}
+                {page === 'saved' && <Saved style={style} user={user} setUpperPopup={setUpperPopup} setPage={setPage} setHeader={setHeader}/>}
+                {page === 'vote' && <Vote style={style} user={user} setUpperPopup={setUpperPopup} setPage={setPage} setHeader={setHeader}/>}
+                {page === 'landing' && <Landing setPage={setPage} />}
                 <UpperPopup tyle={style} upperPopup={upperPopup} setUpperPopup={setUpperPopup} />
             </View>
         )

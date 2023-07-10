@@ -1,15 +1,16 @@
 import { Text, View } from 'react-native'
-import { style } from '../style'
+import style  from '../style'
 import { useState, useEffect } from 'react'
 import { service } from '../service'
 import { Loader } from '../cmps/loader'
 import { Error } from './error'
 
-export function Saved({ user, setUpperPopup }) {
+export function Saved({ user, setUpperPopup,setPage,setHeader }) {
     const [saved, setSaved] = useState(null)
     const [error, setError] = useState(false)
 
     useEffect(() => {
+        setHeader('My List')
         loadSaved()
     }, [])
 

@@ -1,6 +1,6 @@
 import { View, Text } from 'react-native'
 import { useEffect } from "react"
-import { style } from '../style'
+import style  from '../style'
 
 export function UpperPopup({ upperPopup, setUpperPopup }) {
     useEffect(() => {
