@@ -29,8 +29,8 @@ async function getSaved(userId) {
     return saved
 }
 
-async function saveAnime(id, animeName, image) {
-    const confirm = await httpService.post('save-anime', { id, animeName, image })
+async function saveAnime(id, animeName, image, spot, question) {
+    const confirm = await httpService.post('save-anime', { id, animeName, image, spot, question })
     return confirm
 }
 

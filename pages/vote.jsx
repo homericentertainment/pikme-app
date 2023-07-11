@@ -1,5 +1,4 @@
-import { Text,View } from 'react-native'
-import { Txt } from '../cmps/txt'
+import { Image, Text, View, TouchableHighlight } from 'react-native'
 import style from '../style'
 import { useState, useEffect } from 'react'
 import { Error } from './error'
@@ -10,16 +9,17 @@ export function Vote({ user, setUpperPopup, setPage, setHeader }) {
     const [event, setEvent] = useState(null)
     const [voteState, setVoteState] = useState(null)
     const [error, setError] = useState(false)
+    const [saved, setSaved] = useState({})
 
     useEffect(() => {
         loadCurrentEvent()
+        loadSaved()
     }, [])
 
     const loadCurrentEvent = async () => {
         try {
             const loadedEvent = await service.getCurrentEvent()
-            console.log(loadedEvent.title)
-            setHeader(loadedEvent.title)
+            setHeader(loadedEvent.title + '?')
             setEvent(loadedEvent)
             if (loadedEvent.voters[user._id]) {
                 setVoteState('voted')
@@ -84,15 +84,41 @@ export function Vote({ user, setUpperPopup, setPage, setHeader }) {
         }
     }
 
-    const saveAnime = async (anime, image) => {
+    async function loadSaved() {
         try {
-            await service.saveAnime(user._id, anime, image)
-            setUpperPopup('saved')
+            const loadedSaved = await service.getSaved(user._id)
+            setSaved(loadedSaved)
+        }
+        catch (err) {
+            console.log(err)
+            setError(true)
+        }
+    }
 
+    const handleSave = async (anime, image, spot, question) => {
+        try {
+            if (!saved[anime]) {
+                console.log(0)
+                const newAnime = await service.saveAnime(user._id, anime, image, spot, question)
+                setSaved({ ...saved, [anime]: newAnime })
+            }
+            else {
+                console.log(1)
+                await service.deleteSaved(user._id, anime)
+                const s = { ...saved }
+                delete s[anime]
+                setSaved(s)
+            }
         }
         catch {
             setUpperPopup('error')
         }
+    }
+
+    const getImage = (idx) => {
+        if (idx === 0) return <Image source={require('../images/1.webp')} />
+        if (idx === 1) return <Image source={require('../images/2.webp')} />
+        if (idx === 2) return <Image source={require('../images/3.webp')} />
     }
 
     if (error) return <Error />
@@ -102,10 +128,21 @@ export function Vote({ user, setUpperPopup, setPage, setHeader }) {
     if (voteState === 'voted') {
         try {
             const participants = Object.values(event.participants).sort((a, b) => b.votes - a.votes)
-            return <View>
-                {participants.map((p) => <View key={p.name}>
-                    <Text style={style.words}>{p.name} : {p.votes}</Text>
-                    <Text style={style.words} onPress={() => saveAnime(p.from, p.animeImage)}>save {p.from}</Text>
+            return <View style={style.saved}>
+                {participants.map((p, idx) => <View key={p.name} style={{ ...style.leadboardItem, borderColor: saved[p.from] ? '#699BF7' : 'rgba(255,255,255,0.6)' }}>
+                    <View style={style.savedWrapper}>
+                        <View >{idx <= 2 ? getImage(idx) : <Text style={{ width: 30, textAlign: 'center', color: 'white' }}>{idx + 1}</Text>}</View>
+                        <Image style={style.savedImage} source={p.image} />
+                        <View style={style.savedDetails}>
+                            <Text>{p.name}</Text>
+                            {p.name !== p.from && <Text>from {p.from}</Text>}
+                        </View>
+                    </View>
+                    <TouchableHighlight style={style.saveButton} onPress={() => handleSave(p.from, p.animeImage, idx + 1, event.title)}>
+                        <Image  source={saved[p.from] ? require('../images/full.webp') : require('../images/empty.webp')} />
+                    </TouchableHighlight>
+
+                    <Text>{p.votes} Votes</Text>
                 </View>)}
             </View>
         }

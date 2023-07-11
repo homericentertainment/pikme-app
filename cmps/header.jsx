@@ -1,5 +1,4 @@
-import { View, Image, TouchableHighlight } from 'react-native'
-import { Txt } from './txt'
+import { Text,View, Image, TouchableHighlight } from 'react-native'
 import style from '../style'
 export function Header({ header, setPage }) {
 
@@ -11,8 +10,8 @@ export function Header({ header, setPage }) {
     return (
         <View style={style.header}>
             <TouchableHighlight onPress={() => { () => console.log('mmm') }} ><Image style={style.menuIcon} source={require('../images/menu.webp')} /></TouchableHighlight>
-            <Txt msg={header} fontSize={20}/>
-            <TouchableHighlight onPress={navigate} ><Image style={style.menuIcon} source={require('../images/switch.webp')} /></TouchableHighlight>
+            <Text style={style.headerText}>{header}</Text>
+            <TouchableHighlight onPress={navigate} ><Image style={style.menuIcon} source={header==='My List'? require('../images/play.webp') : require('../images/list.webp')} /></TouchableHighlight>
         </View>
     )
 }
