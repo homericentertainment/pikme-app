@@ -16,7 +16,7 @@ export function UpperPopup({ upperPopup, setUpperPopup }) {
     return (
         <View style={style.upperPopupWrapper}>
             <View style={style.upperPopup}>
-                {upperPopup === 'error' && <Text>Something went wrong... please try again later</Text>}
+                {upperPopup === 'error' && <Text>Something went wrong, please try again later.</Text>}
                 {upperPopup === 'saved' && <Text>saved!</Text>}
             </View>
         </View>

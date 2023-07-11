@@ -5,6 +5,9 @@ const action = '#699BF7'
 const words = 'white'
 
 const style = {
+  back: back,
+  action: action,
+  words: words,
   main: {
     width: Dimensions.get('window').width,
     backgroundImage: 'url(./images/background.webp)',
@@ -13,6 +16,64 @@ const style = {
     paddingTop: 75,
     boxSizing: "border-box",
     color: words
+  },
+  vote: {
+    marginTop: 20,
+    width: Dimensions.get('window').width,
+    height:'90%',
+    paddingLeft: 18,
+    paddingRight: 18,
+    display: 'flex',
+    flexDirection: 'column',
+    alignItems: 'flex-start',
+  },
+  swipeHolder: {
+    flex:100,
+    width: '100%',
+    height: (Dimensions.get('window').width - 36),
+    marginBottom: 20,
+    borderRadius: 10,
+    display: 'flex',
+    flexDirection: 'row',
+  },
+  swipeRight: {
+    width: '50%',
+    height: '100%',
+    resizeMode: 'cover',
+    borderTopLeftRadius: 15,
+    borderBottomLeftRadius: 15,
+  },
+  swipeLeft: {
+    borderTopRightRadius: 15,
+    borderBottomRightRadius: 15,
+    width: '50%',
+    height: '100%',
+    resizeMode: 'cover',
+  },
+  randomize: {
+    width: '100%',
+    padding: 12,
+    borderRadius: 10,
+    backgroundColor: back,
+    textAlign: 'center',
+  },
+  randomizeText: {
+    fontSize: 24,
+    fontWeight: 'bold',
+    color: words,
+  },
+  progressWrapper: {
+    width: '100%',
+    height: 20,
+    borderRadius: 10,
+    backgroundColor: back,
+    marginBottom: 20
+  },
+  progress: {
+    height: 20,
+    borderRadius: 10,
+    minWidth: 20,
+    backgroundColor: action,
   },
   leadboardItem: {
     width: '100%',
@@ -68,7 +129,7 @@ const style = {
     alignItems: 'flex-start',
     justifyContent: 'center',
     height: 50,
-    gap:8
+    gap: 8
   },
   savedName: {
     fontSize: 18,
@@ -102,7 +163,7 @@ const style = {
     position: 'fixed',
     top: 0,
     height: 70,
-    paddingTop:30,
+    paddingTop: 30,
     zIndex: 1,
     borderBottomColor: back,
     borderBottomWidth: 1,
@@ -116,6 +177,21 @@ const style = {
   menuIcon: {
     width: 30,
     height: 30,
+  },
+  error: {
+    marginTop: 140,
+  },
+  errorText: {
+    fontSize: 20,
+    color: words,
+    textAlign: 'center',
+    fontWeight: 'bold',
+  },
+  errorImage: {
+    width: 140,
+    height: 140,
+    margin: 'auto',
+    marginBottom: 25
   },
   underline: {
     textDecorationLine: "underline",
