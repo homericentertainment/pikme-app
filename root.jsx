@@ -47,12 +47,6 @@ export default function Root() {
         }
     }
 
-    Text.defaultProps = {
-        ...Text.defaultProps,
-        style: { color: 'white' },
-      };
-      
-
     if (error) return <Error />
 
     if (!user) return <Loader />
