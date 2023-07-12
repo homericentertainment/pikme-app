@@ -1,4 +1,4 @@
-import { Text, View, Image, Dimensions,StyleSheet } from 'react-native'
+import { Text, View, ImageBackground, ScrollView } from 'react-native'
 import { Loader } from './cmps/loader'
 import { Error } from './pages/error'
 import { useState, useEffect } from 'react'
@@ -13,10 +13,11 @@ import { service } from './service'
 
 export default function Root() {
     const [user, setUser] = useState(null)
-    const [upperPopup, setUpperPopup] = useState('123')
+    const [upperPopup, setUpperPopup] = useState('')
     const [page, setPage] = useState('vote')
     const [error, setError] = useState(false)
-    const [header,setHeader] = useState('')
+    const [header, setHeader] = useState('')
+    const [menu, setMenu] = useState(false)
 
     useEffect(() => {
         loadFont()
@@ -53,13 +54,17 @@ export default function Root() {
 
     try {
         return (
-            <View style={style.main}>
-                {page !== 'landing' && <Header header={header} setPage={setPage}/>}
-                {page === 'saved' && <Saved style={style} user={user} setUpperPopup={setUpperPopup} setPage={setPage} setHeader={setHeader}/>}
-                {page === 'vote' && <Vote style={style} user={user} setUpperPopup={setUpperPopup} setPage={setPage} setHeader={setHeader}/>}
-                {page === 'landing' && <Landing setPage={setPage} />}
-                <UpperPopup tyle={style} upperPopup={upperPopup} setUpperPopup={setUpperPopup} />
-            </View>
+            <ImageBackground source={require('./images/background.webp')} style={{ width: '100%', height: '100%' }}>
+                {page !== 'landing' && <Header header={header} setPage={setPage} />}
+                <ScrollView>
+                    <View style={style.main}>
+                        {page === 'saved' && <Saved style={style} user={user} setUpperPopup={setUpperPopup} setPage={setPage} setHeader={setHeader} />}
+                        {page === 'vote' && <Vote style={style} user={user} setUpperPopup={setUpperPopup} setPage={setPage} setHeader={setHeader} />}
+                        {page === 'landing' && <Landing setPage={setPage} />}
+                        <UpperPopup tyle={style} upperPopup={upperPopup} setUpperPopup={setUpperPopup} />
+                    </View>
+                </ScrollView>
+            </ImageBackground>
         )
     }
     catch (err) {

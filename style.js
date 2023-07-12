@@ -1,26 +1,21 @@
 import { Dimensions } from "react-native"
+import { StyleSheet } from "react-native"
 
 const back = 'rgba(105,155,247,0.4)'
 const action = '#699BF7'
 const words = 'white'
 
-const style = {
-  back: back,
-  action: action,
-  words: words,
+const style = StyleSheet.create({
   main: {
-    width: Dimensions.get('window').width,
-    backgroundImage: 'url(./images/background.webp)',
-    backgroundSize: 'cover',
-    minHeight: Dimensions.get('window').height,
-    paddingTop: 75,
+    minHeight: Dimensions.get('window').height - 100,
     boxSizing: "border-box",
-    color: words
+    color: words,
+    marginTop: 100,
   },
   vote: {
     marginTop: 20,
     width: Dimensions.get('window').width,
-    height:'90%',
+    height: '90%',
     paddingLeft: 18,
     paddingRight: 18,
     display: 'flex',
@@ -91,7 +86,7 @@ const style = {
   savedImage: {
     width: 50,
     height: 50,
-    borderRadius: '50%',
+    borderRadius: 100,
   },
   savedWrapper: {
     display: 'flex',
@@ -137,13 +132,11 @@ const style = {
     flexDirection: 'row',
     justifyContent: 'space-between',
     alignItems: 'center',
-    position: 'fixed',
+    position: 'absolute',
     top: 0,
-    height: 70,
-    paddingTop: 30,
+    paddingTop: 50,
     zIndex: 1,
-    borderBottomColor: back,
-    borderBottomWidth: 1,
+    paddingBottom: 50,
     paddingLeft: 15,
     paddingRight: 15,
   },
@@ -168,7 +161,8 @@ const style = {
     width: 140,
     height: 140,
     margin: 'auto',
-    marginBottom: 25
+    marginBottom: 25,
+    alignSelf: 'center',
   },
   underline: {
     textDecorationLine: "underline",
@@ -206,12 +200,14 @@ const style = {
   play: {
     width: '85%',
     backgroundColor: action,
-    fontSize: 300,
     borderRadius: 10,
     margin: 'auto',
-    textAlign: 'center',
     padding: 10,
     border: 'none',
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'center',
+    alignSelf: 'center',
   },
   upperPopupWrapper: {
     position: "absolute",
@@ -234,6 +230,6 @@ const style = {
   words: {
     color: words,
   }
-};
+})
 
 export default style;

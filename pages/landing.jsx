@@ -1,15 +1,15 @@
-import { Text, View, Image, TouchableNativeFeedback } from 'react-native'
+import { Text, View, Image } from 'react-native'
 import style from '../style'
 import { service } from '../service'
 export function Landing({ setPage }) {
 
     const endLanding = async () => {
-        console.log('here')
         try {
-            await service.saveToStorage('landing', true)
+            await service.saveToStorage('landing', 'true')
             setPage('vote')
         }
-        catch {
+        catch (err){
+            console.log(err)
             setPage('vote')
         }
     }

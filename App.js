@@ -1,5 +1,5 @@
 import Root from './root'
-import { Text } from 'react-native';
+import { Text } from 'react-native'
 
 export default function App() {
 
@@ -7,7 +7,7 @@ export default function App() {
     ...Text.defaultProps,
     style: { color: 'white' },
   };
-  
+
   return (
     <Root />
   )

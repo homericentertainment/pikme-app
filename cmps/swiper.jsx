@@ -47,10 +47,10 @@ export function Swiper({ left, right, handleChoice }) {
         return (
             <View style={styles.swipeHolder}>
                 <Animated.View style={[styles.left, { width: widthLeft, zIndex: zIndexLeft }]}{...panResponderLeft.panHandlers}>
-                    <Image source={left} style={{ ...styles.left, width: widthLeft }} />
+                    <Image source={{ uri: left }} style={{ ...styles.left, width: widthLeft }} />
                 </Animated.View>
                 <Animated.View style={[styles.right, { width: widthRight, zIndex: zIndexRight }]}{...panResponderRight.panHandlers}>
-                    <Image source={right} style={{ ...styles.right, width: widthRight }} />
+                    <Image source={{ uri: right }} style={{ ...styles.right, width: widthRight }} />
                 </Animated.View>
             </View>
         )

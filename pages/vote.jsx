@@ -37,6 +37,7 @@ export function Vote({ user, setUpperPopup, setHeader }) {
                 state = createNewState(loadedEvent)
                 await service.saveToStorage('prevId', loadedEvent._id)
             }
+            console.log('state', state)
             setVoteState(state)
         }
         catch (err) {
@@ -144,7 +145,7 @@ export function Vote({ user, setUpperPopup, setHeader }) {
                 {participants.map((p, idx) => <View key={p.name} style={{ ...style.leadboardItem, borderColor: saved[p.from] ? '#699BF7' : 'rgba(255,255,255,0.6)' }}>
                     <View style={style.savedWrapper}>
                         <View >{idx <= 2 ? getImage(idx) : <Text style={{ width: 30, textAlign: 'center', color: 'white' }}>{idx + 1}</Text>}</View>
-                        <Image style={style.savedImage} source={p.image} />
+                        <Image style={style.savedImage} source={{uri:p.image}} />
                         <View style={style.savedDetails}>
                             <Text>{p.name}</Text>
                             {p.name !== p.from && <Text>from {p.from}</Text>}

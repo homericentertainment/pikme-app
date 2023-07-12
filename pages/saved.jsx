@@ -50,7 +50,7 @@ export function Saved({ user, setUpperPopup, setHeader }) {
             <View style={style.saved}>
                 {saved.map((anime, idx) => <View key={idx} style={style.savedItem}>
                     <View style={style.savedWrapper}>
-                        <Image style={style.savedImage} source={anime.image} />
+                        <Image style={style.savedImage} source={{uri:anime.image}} />
                         <View style={style.savedDetails}>
                             <Text style={style.savedName}>{anime.name}</Text>
                             <Text style={style.savedSpot}>#{anime.spot} {anime.question}</Text>
