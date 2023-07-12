@@ -40,7 +40,10 @@ export function Saved({ user, setUpperPopup, setHeader }) {
 
     if (!saved) return <Loader />
 
-    if (saved.length === 0) return <Text style={style.noSaved}>There are currently no saved anime</Text>
+    if (saved.length === 0) return <View style={style.error}>
+        <Image style={style.errorImage} source={require('../images/listBig.webp')} />
+        <Text style={style.errorText}>There are currently no saved anime. share your opinions and view the leadboard in order to save some awsome anime!</Text>
+    </View>
 
     try {
         return (
@@ -65,4 +68,3 @@ export function Saved({ user, setUpperPopup, setHeader }) {
 
 }
 
-               
